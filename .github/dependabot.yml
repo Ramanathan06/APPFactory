@@ -1,0 +1,47 @@
+version: 2
+updates:
+  # Frontend npm dependencies
+  - package-ecosystem: "npm"
+    directory: "/apps/frontend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 10
+    groups:
+      electron:
+        patterns:
+          - "electron*"
+          - "@electron*"
+      react:
+        patterns:
+          - "react*"
+          - "@types/react*"
+      testing:
+        patterns:
+          - "vitest*"
+          - "@vitest*"
+          - "playwright*"
+          - "@playwright*"
+      dev-dependencies:
+        dependency-type: "development"
+        exclude-patterns:
+          - "electron*"
+          - "react*"
+          - "vitest*"
+          - "playwright*"
+
+  # Backend Python dependencies
+  - package-ecosystem: "pip"
+    directory: "/apps/backend"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5

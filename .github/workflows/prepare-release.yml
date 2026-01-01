@@ -1,0 +1,78 @@
+name: Prepare Release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/frontend/package.json'
+
+jobs:
+  check-version:
+    name: Check Version Change
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get-version.outputs.version }}
+      tag_exists: ${{ steps.check-tag.outputs.exists }}
+      should_release: ${{ steps.decide.outputs.should_release }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get version from package.json
+        id: get-version
+        run: |
+          VERSION=$(node -p "require('./apps/frontend/package.json').version")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Detected version: $VERSION"
+
+      - name: Check if tag exists
+        id: check-tag
+        run: |
+          if git rev-parse "v${{ steps.get-version.outputs.version }}" >/dev/null 2>&1; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "Tag v${{ steps.get-version.outputs.version }} already exists"
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "Tag v${{ steps.get-version.outputs.version }} does not exist"
+          fi
+
+      - name: Decide if release should be created
+        id: decide
+        run: |
+          if [ "${{ steps.check-tag.outputs.exists }}" = "false" ]; then
+            echo "should_release=true" >> $GITHUB_OUTPUT
+            echo "Will create release for v${{ steps.get-version.outputs.version }}"
+          else
+            echo "should_release=false" >> $GITHUB_OUTPUT
+            echo "Skipping release - tag already exists"
+          fi
+
+  create-tag:
+    name: Create Release Tag
+    runs-on: ubuntu-latest
+    needs: check-version
+    if: needs.check-version.outputs.should_release == 'true'
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create and push tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "v${{ needs.check-version.outputs.version }}" -m "Release v${{ needs.check-version.outputs.version }}"
+          git push origin "v${{ needs.check-version.outputs.version }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Summary
+        run: |
+          echo "## Release Tag Created" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Created tag: \`v${{ needs.check-version.outputs.version }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "The release workflow will now build and publish the release." >> $GITHUB_STEP_SUMMARY
