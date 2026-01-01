@@ -71,7 +71,7 @@ const initialGenerationStatus: IdeationGenerationStatus = {
 const initialConfig: IdeationConfig = {
   enabledTypes: [...DEFAULT_IDEATION_CONFIG.enabledTypes] as IdeationType[],
   includeRoadmapContext: DEFAULT_IDEATION_CONFIG.includeRoadmapContext,
-  includeKanbanContext: DEFAULT_IDEATION_CONFIG.includeKanbanContext,
+  includeAlphhaContext: DEFAULT_IDEATION_CONFIG.includeAlphhaContext,
   maxIdeasPerType: DEFAULT_IDEATION_CONFIG.maxIdeasPerType
 };
 
@@ -403,7 +403,7 @@ export function generateIdeation(projectId: string): void {
       projectId,
       enabledTypes: config.enabledTypes,
       includeRoadmapContext: config.includeRoadmapContext,
-      includeKanbanContext: config.includeKanbanContext,
+      includeAlphhaContext: config.includeAlphhaContext,
       maxIdeasPerType: config.maxIdeasPerType
     });
   }

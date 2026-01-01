@@ -33,7 +33,7 @@ export function useGitHubInvestigation(projectId: string | undefined) {
       (eventProjectId, result) => {
         if (eventProjectId === projectId) {
           setInvestigationResult(result);
-          // Refresh the task store so the new task appears on the Kanban board
+          // Refresh the task store so the new task appears on the Alphha board
           if (result.success && result.taskId) {
             loadTasks(projectId);
           }

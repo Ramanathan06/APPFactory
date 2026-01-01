@@ -44,9 +44,9 @@ roadmap/
 - Single "Generate Roadmap" CTA
 
 #### `RoadmapTabs.tsx`
-- Tab navigation (Phases, All Features, By Priority, Kanban)
+- Tab navigation (Phases, All Features, By Priority, Alphha)
 - Renders appropriate view based on active tab
-- Delegates to PhaseCard, FeatureCard, and RoadmapKanbanView
+- Delegates to PhaseCard, FeatureCard, and RoadmapAlphhaView
 
 #### `PhaseCard.tsx`
 - Individual phase card with status indicator

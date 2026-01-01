@@ -23,7 +23,7 @@ export type IdeationGenerationPhase = 'idle' | 'analyzing' | 'discovering' | 'ge
 export interface IdeationConfig {
   enabledTypes: IdeationType[];
   includeRoadmapContext: boolean;
-  includeKanbanContext: boolean;
+  includeAlphhaContext: boolean;
   maxIdeasPerType: number;
   append?: boolean; // If true, append to existing ideas instead of replacing
   model?: string;          // Model shorthand (opus, sonnet, haiku)

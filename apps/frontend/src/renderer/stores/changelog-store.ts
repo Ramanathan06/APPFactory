@@ -280,7 +280,7 @@ export async function loadChangelogData(projectId: string): Promise<void> {
 
   try {
     // Get tasks from the task store (which has the correct UI status)
-    // This is necessary because the Kanban board updates task status in the Zustand store,
+    // This is necessary because the Alphha board updates task status in the Zustand store,
     // but the backend reads from the filesystem which doesn't reflect UI-only changes
     const taskStore = useTaskStore.getState();
     const tasks = taskStore.tasks;

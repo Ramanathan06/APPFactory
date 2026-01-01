@@ -57,7 +57,7 @@ export function ViewStateProvider({ children }: ViewStateProviderProps) {
  *
  * @example
  * ```tsx
- * function KanbanBoard() {
+ * function AlphhaBoard() {
  *   const { showArchived, toggleShowArchived } = useViewState();
  *
  *   return (

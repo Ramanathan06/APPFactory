@@ -25,7 +25,7 @@ import {
   DialogTitle
 } from './components/ui/dialog';
 import { Sidebar, type SidebarView } from './components/Sidebar';
-import { KanbanBoard } from './components/KanbanBoard';
+import { AlphhaBoard } from './components/AlphhaBoard';
 import { TaskDetailModal } from './components/task-detail/TaskDetailModal';
 import { TaskCreationWizard } from './components/TaskCreationWizard';
 import { AppSettingsDialog, type AppSection } from './components/settings/AppSettings';
@@ -675,7 +675,7 @@ export function App() {
             {selectedProject ? (
               <>
                 {activeView === 'kanban' && (
-                  <KanbanBoard
+                  <AlphhaBoard
                     tasks={tasks}
                     onTaskClick={handleTaskClick}
                     onNewTaskClick={() => setIsNewTaskDialogOpen(true)}

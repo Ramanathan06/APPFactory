@@ -170,6 +170,6 @@ export const CODE_QUALITY_SEVERITY_COLORS: Record<string, string> = {
 export const DEFAULT_IDEATION_CONFIG = {
   enabledTypes: ['code_improvements', 'ui_ux_improvements', 'security_hardening'] as const,
   includeRoadmapContext: true,
-  includeKanbanContext: true,
+  includeAlphhaContext: true,
   maxIdeasPerType: 5
 };

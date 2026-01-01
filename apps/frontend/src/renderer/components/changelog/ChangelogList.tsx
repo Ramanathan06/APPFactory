@@ -98,7 +98,7 @@ export function ChangelogList({
                   <FileText className="mx-auto h-12 w-12 text-muted-foreground/30" />
                   <h3 className="mt-4 text-lg font-medium">No Completed Tasks</h3>
                   <p className="mt-2 text-sm text-muted-foreground max-w-md">
-                    Complete tasks in the Kanban board and mark them as "Done" to include them in your changelog.
+                    Complete tasks in the Alphha board and mark them as "Done" to include them in your changelog.
                   </p>
                 </div>
               </div>

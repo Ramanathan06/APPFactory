@@ -93,10 +93,10 @@ export function IdeationDialogs({
                 />
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-sm">Include Kanban Context</span>
+                <span className="text-sm">Include Alphha Context</span>
                 <Switch
-                  checked={config.includeKanbanContext}
-                  onCheckedChange={(checked) => onSetConfig({ includeKanbanContext: checked })}
+                  checked={config.includeAlphhaContext}
+                  onCheckedChange={(checked) => onSetConfig({ includeAlphhaContext: checked })}
                 />
               </div>
             </div>

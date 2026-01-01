@@ -20,7 +20,7 @@ export function ImportSuccessBanner({ importResult, onClose }: ImportSuccessBann
           Successfully imported {importResult.imported} task{importResult.imported !== 1 ? 's' : ''}
         </p>
         <p className="text-xs text-success/80 mt-1">
-          Tasks are being processed. Check your Kanban board for progress.
+          Tasks are being processed. Check your Alphha board for progress.
         </p>
       </div>
       <Button variant="outline" size="sm" onClick={onClose}>

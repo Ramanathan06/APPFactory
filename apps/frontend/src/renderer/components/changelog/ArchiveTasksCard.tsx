@@ -58,7 +58,7 @@ export function ArchiveTasksCard({
           <div className="space-y-3">
             <p className="text-sm text-muted-foreground">
               Archive {selectedTasks.length} task{selectedTasks.length !== 1 ? 's' : ''} to
-              clean up your Kanban board. Archived tasks can be viewed using the "Show
+              clean up your Alphha board. Archived tasks can be viewed using the "Show
               Archived" toggle.
             </p>
             {archiveError && (

@@ -190,7 +190,7 @@ interface RawIdeationSession {
     include_roadmap_context?: boolean;
     includeRoadmapContext?: boolean;
     include_kanban_context?: boolean;
-    includeKanbanContext?: boolean;
+    includeAlphhaContext?: boolean;
     max_ideas_per_type?: number;
     maxIdeasPerType?: number;
   };
@@ -224,7 +224,7 @@ export function transformSessionFromSnakeCase(
     config: {
       enabledTypes,
       includeRoadmapContext: rawSession.config?.include_roadmap_context ?? rawSession.config?.includeRoadmapContext ?? true,
-      includeKanbanContext: rawSession.config?.include_kanban_context ?? rawSession.config?.includeKanbanContext ?? true,
+      includeAlphhaContext: rawSession.config?.include_kanban_context ?? rawSession.config?.includeAlphhaContext ?? true,
       maxIdeasPerType: rawSession.config?.max_ideas_per_type || rawSession.config?.maxIdeasPerType || 5
     },
     ideas: (rawSession.ideas || []).map(idea => transformIdeaFromSnakeCase(idea)),
