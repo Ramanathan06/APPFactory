@@ -28,7 +28,7 @@ export function RoadmapTabs({
   return (
     <Tabs value={activeTab} onValueChange={onTabChange} className="h-full flex flex-col">
       <TabsList className="shrink-0 mx-4 mt-4">
-        <TabsTrigger value="kanban">Kanban</TabsTrigger>
+        <TabsTrigger value="kanban">Alphha</TabsTrigger>
         <TabsTrigger value="phases">Phases</TabsTrigger>
         <TabsTrigger value="features">All Features</TabsTrigger>
         <TabsTrigger value="priorities">By Priority</TabsTrigger>
