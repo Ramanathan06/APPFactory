@@ -2,7 +2,6 @@
   "name": "alphhaspace",
   "version": "2.7.3",
   "description": "Autonomous multi-agent coding framework powered by Claude AI",
-  "license": "AGPL-3.0",
   "author": "Alphhaspace Team",
   "scripts": {
     "install:backend": "node scripts/install-backend.js",

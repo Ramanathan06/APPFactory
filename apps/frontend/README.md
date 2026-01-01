@@ -238,7 +238,3 @@ git commit -m "chore: update dependencies"
 ## Package Manager
 
 This project uses **npm** (not pnpm or yarn). The lock files for other package managers are ignored.
-
-## License
-
-AGPL-3.0
