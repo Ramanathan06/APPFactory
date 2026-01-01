@@ -157,7 +157,7 @@ export function TaskSelector({
               </DropdownMenuItem>
             ) : (
               <div className="px-2 py-1.5 text-xs text-muted-foreground italic">
-                Create tasks in the Kanban board
+                Create tasks in the Alphha board
               </div>
             )}
           </>

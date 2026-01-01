@@ -4,7 +4,7 @@ import { Card } from '../ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 import { PhaseCard } from './PhaseCard';
 import { FeatureCard } from './FeatureCard';
-import { RoadmapKanbanView } from '../RoadmapKanbanView';
+import { RoadmapAlphhaView } from '../RoadmapAlphhaView';
 import { getFeaturesByPhase } from '../../stores/roadmap-store';
 import {
   ROADMAP_PRIORITY_COLORS,
@@ -34,9 +34,9 @@ export function RoadmapTabs({
         <TabsTrigger value="priorities">By Priority</TabsTrigger>
       </TabsList>
 
-      {/* Kanban View */}
+      {/* Alphha View */}
       <TabsContent value="kanban" className="flex-1 overflow-hidden">
-        <RoadmapKanbanView
+        <RoadmapAlphhaView
           roadmap={roadmap}
           onFeatureClick={onFeatureSelect}
           onConvertToSpec={onConvertToSpec}

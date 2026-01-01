@@ -41,7 +41,7 @@
   "investigation": {
     "title": "Créer une tâche à partir de l'issue",
     "issuePrefix": "Issue",
-    "description": "Créez une tâche à partir de cette issue GitLab. La tâche sera ajoutée à votre tableau Kanban dans la colonne Backlog.",
+    "description": "Créez une tâche à partir de cette issue GitLab. La tâche sera ajoutée à votre tableau Alphha dans la colonne Backlog.",
     "selectNotes": "Sélectionner les notes à inclure",
     "deselectAll": "Tout désélectionner",
     "selectAll": "Tout sélectionner",
@@ -51,7 +51,7 @@
     "includeLabels": "Labels et métadonnées de l'issue",
     "noNotes": "Pas de notes (cette issue n'a pas de notes)",
     "failedToLoadNotes": "Échec du chargement des notes",
-    "taskCreated": "Tâche créée ! Consultez-la dans votre tableau Kanban.",
+    "taskCreated": "Tâche créée ! Consultez-la dans votre tableau Alphha.",
     "creating": "Création...",
     "cancel": "Annuler",
     "done": "Terminé",

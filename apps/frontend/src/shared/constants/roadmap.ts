@@ -42,7 +42,7 @@ export const ROADMAP_IMPACT_COLORS: Record<string, string> = {
 };
 
 // ============================================
-// Roadmap Status (for Kanban columns)
+// Roadmap Status (for Alphha columns)
 // ============================================
 
 export interface RoadmapStatusColumn {

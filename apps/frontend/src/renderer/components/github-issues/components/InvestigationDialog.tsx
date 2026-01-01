@@ -115,7 +115,7 @@ export function InvestigationDialog({
         {investigationStatus.phase === 'idle' ? (
           <div className="space-y-4 flex-1 min-h-0 flex flex-col">
             <p className="text-sm text-muted-foreground">
-              Create a task from this GitHub issue. The task will be added to your Kanban board in the Backlog column.
+              Create a task from this GitHub issue. The task will be added to your Alphha board in the Backlog column.
             </p>
 
             {/* Comments section */}
@@ -203,7 +203,7 @@ export function InvestigationDialog({
             {investigationStatus.phase === 'complete' && (
               <div className="rounded-lg bg-success/10 border border-success/30 p-3 flex items-center gap-2 text-sm text-success">
                 <CheckCircle2 className="h-4 w-4" />
-                Task created! View it in your Kanban board.
+                Task created! View it in your Alphha board.
               </div>
             )}
           </div>

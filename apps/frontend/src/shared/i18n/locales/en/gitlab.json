@@ -41,7 +41,7 @@
   "investigation": {
     "title": "Create Task from Issue",
     "issuePrefix": "Issue",
-    "description": "Create a task from this GitLab issue. The task will be added to your Kanban board in the Backlog column.",
+    "description": "Create a task from this GitLab issue. The task will be added to your Alphha board in the Backlog column.",
     "selectNotes": "Select Notes to Include",
     "deselectAll": "Deselect All",
     "selectAll": "Select All",
@@ -51,7 +51,7 @@
     "includeLabels": "Labels and metadata from the issue",
     "noNotes": "No notes (this issue has no notes)",
     "failedToLoadNotes": "Failed to load notes",
-    "taskCreated": "Task created! View it in your Kanban board.",
+    "taskCreated": "Task created! View it in your Alphha board.",
     "creating": "Creating...",
     "cancel": "Cancel",
     "done": "Done",

@@ -4,10 +4,10 @@
  */
 
 // ============================================
-// Task Status (Kanban columns)
+// Task Status (Alphha columns)
 // ============================================
 
-// Task status columns in Kanban board order
+// Task status columns in Alphha board order
 export const TASK_STATUS_COLUMNS = [
   'backlog',
   'in_progress',

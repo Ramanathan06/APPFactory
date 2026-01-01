@@ -43,7 +43,7 @@ export async function getIdeationSession(
       config: {
         enabledTypes: enabledTypes as IdeationSession['config']['enabledTypes'],
         includeRoadmapContext: rawIdeation.config?.include_roadmap_context ?? rawIdeation.config?.includeRoadmapContext ?? true,
-        includeKanbanContext: rawIdeation.config?.include_kanban_context ?? rawIdeation.config?.includeKanbanContext ?? true,
+        includeAlphhaContext: rawIdeation.config?.include_kanban_context ?? rawIdeation.config?.includeAlphhaContext ?? true,
         maxIdeasPerType: rawIdeation.config?.max_ideas_per_type || rawIdeation.config?.maxIdeasPerType || 5
       },
       ideas: (rawIdeation.ideas || []).map(idea => transformIdeaFromSnakeCase(idea)),

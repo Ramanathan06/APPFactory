@@ -151,7 +151,7 @@ export class AgentQueueManager {
     if (!config.includeRoadmapContext) {
       args.push('--no-roadmap');
     }
-    if (!config.includeKanbanContext) {
+    if (!config.includeAlphhaContext) {
       args.push('--no-kanban');
     }
 

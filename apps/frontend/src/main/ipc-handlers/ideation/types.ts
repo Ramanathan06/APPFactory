@@ -82,7 +82,7 @@ export interface RawIdeationData {
     include_roadmap_context?: boolean;
     includeRoadmapContext?: boolean;
     include_kanban_context?: boolean;
-    includeKanbanContext?: boolean;
+    includeAlphhaContext?: boolean;
     max_ideas_per_type?: number;
     maxIdeasPerType?: number;
   };

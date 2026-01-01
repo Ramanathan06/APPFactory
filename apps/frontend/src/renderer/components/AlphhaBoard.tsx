@@ -29,7 +29,7 @@ import { cn } from '../lib/utils';
 import { persistTaskStatus, archiveTasks } from '../stores/task-store';
 import type { Task, TaskStatus } from '../../shared/types';
 
-interface KanbanBoardProps {
+interface AlphhaBoardProps {
   tasks: Task[];
   onTaskClick: (task: Task) => void;
   onNewTaskClick?: () => void;
@@ -210,7 +210,7 @@ function DroppableColumn({ status, tasks, onTaskClick, isOver, onAddClick, onArc
   );
 }
 
-export function KanbanBoard({ tasks, onTaskClick, onNewTaskClick }: KanbanBoardProps) {
+export function AlphhaBoard({ tasks, onTaskClick, onNewTaskClick }: AlphhaBoardProps) {
   const { t } = useTranslation('tasks');
   const [activeTask, setActiveTask] = useState<Task | null>(null);
   const [overColumnId, setOverColumnId] = useState<string | null>(null);
@@ -266,7 +266,7 @@ export function KanbanBoard({ tasks, onTaskClick, onNewTaskClick }: KanbanBoardP
     // Get projectId from the first task (all tasks should have the same projectId)
     const projectId = tasks[0]?.projectId;
     if (!projectId) {
-      console.error('[KanbanBoard] No projectId found');
+      console.error('[AlphhaBoard] No projectId found');
       return;
     }
 
@@ -275,7 +275,7 @@ export function KanbanBoard({ tasks, onTaskClick, onNewTaskClick }: KanbanBoardP
 
     const result = await archiveTasks(projectId, doneTaskIds);
     if (!result.success) {
-      console.error('[KanbanBoard] Failed to archive tasks:', result.error);
+      console.error('[AlphhaBoard] Failed to archive tasks:', result.error);
     }
   };
 
@@ -345,7 +345,7 @@ export function KanbanBoard({ tasks, onTaskClick, onNewTaskClick }: KanbanBoardP
 
   return (
     <div className="flex h-full flex-col">
-      {/* Kanban columns */}
+      {/* Alphha columns */}
       <DndContext
         sensors={sensors}
         collisionDetection={closestCorners}

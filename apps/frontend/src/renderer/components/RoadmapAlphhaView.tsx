@@ -31,7 +31,7 @@ import {
 } from '../../shared/constants';
 import type { RoadmapFeature, RoadmapFeatureStatus, Roadmap } from '../../shared/types';
 
-interface RoadmapKanbanViewProps {
+interface RoadmapAlphhaViewProps {
   roadmap: Roadmap;
   onFeatureClick: (feature: RoadmapFeature) => void;
   onConvertToSpec?: (feature: RoadmapFeature) => void;
@@ -170,13 +170,13 @@ function DroppableStatusColumn({
   );
 }
 
-export function RoadmapKanbanView({
+export function RoadmapAlphhaView({
   roadmap,
   onFeatureClick,
   onConvertToSpec,
   onGoToTask,
   onSave
-}: RoadmapKanbanViewProps) {
+}: RoadmapAlphhaViewProps) {
   const [activeFeature, setActiveFeature] = useState<RoadmapFeature | null>(null);
   const [overColumnId, setOverColumnId] = useState<string | null>(null);
 
@@ -283,7 +283,7 @@ export function RoadmapKanbanView({
 
   return (
     <div className="flex h-full flex-col">
-      {/* Kanban columns */}
+      {/* Alphha columns */}
       <DndContext
         sensors={sensors}
         collisionDetection={closestCorners}

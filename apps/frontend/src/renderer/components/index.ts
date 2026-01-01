@@ -1,6 +1,6 @@
 // Re-export all components
 export * from './Sidebar';
-export * from './KanbanBoard';
+export * from './AlphhaBoard';
 export * from './TaskCard';
 export * from './TaskCreationWizard';
 export * from './TaskEditDialog';
