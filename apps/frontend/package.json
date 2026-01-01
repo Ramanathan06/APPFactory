@@ -13,7 +13,6 @@
     "name": "Alphhaspace Team",
     "email": "119136210+AndyMik90@users.noreply.github.com"
   },
-  "license": "AGPL-3.0",
   "engines": {
     "node": ">=24.0.0",
     "npm": ">=10.0.0"

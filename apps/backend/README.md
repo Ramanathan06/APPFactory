@@ -114,7 +114,3 @@ from workspace import setup_workspace
 1. Create module in appropriate folder
 2. Export API in `__init__.py`
 3. Add facade module at root if commonly imported
-
-## License
-
-AGPL-3.0

@@ -4,7 +4,6 @@ Thank you for your interest in contributing to Alphhaspace! This document provid
 
 ## Table of Contents
 
-- [Contributor License Agreement (CLA)](#contributor-license-agreement-cla)
 - [Prerequisites](#prerequisites)
 - [Quick Start](#quick-start)
 - [Development Setup](#development-setup)
@@ -28,25 +27,6 @@ Thank you for your interest in contributing to Alphhaspace! This document provid
 - [Pull Request Process](#pull-request-process)
 - [Issue Reporting](#issue-reporting)
 - [Architecture Overview](#architecture-overview)
-
-## Contributor License Agreement (CLA)
-
-All contributors must sign our Contributor License Agreement (CLA) before contributions can be accepted.
-
-### Why We Require a CLA
-
-Alphhaspace is currently licensed under AGPL-3.0. The CLA ensures the project has proper licensing flexibility should we introduce additional licensing options (such as commercial/enterprise licenses) in the future.
-
-You retain full copyright ownership of your contributions.
-
-### How to Sign
-
-1. Open a Pull Request
-2. The CLA bot will automatically comment with instructions
-3. Comment on the PR with: `I have read the CLA Document and I hereby sign the CLA`
-4. Done - you only need to sign once, and it applies to all future contributions
-
-Read the full CLA here: [CLA.md](CLA.md)
 
 ## Prerequisites
 
@@ -132,7 +112,7 @@ The fastest way to get started:
 
 ```bash
 # Clone the repository
-git clone https://github.com/AndyMik90/Alphhaspace.git
+git clone https://github.com/shibinsp/APPFactory.git
 cd Alphhaspace
 
 # Install all dependencies (cross-platform)
@@ -206,7 +186,7 @@ If you want to run Alphhaspace from source (for development or testing unrelease
 ### Step 1: Clone and Set Up
 
 ```bash
-git clone https://github.com/AndyMik90/Alphhaspace.git
+git clone https://github.com/shibinsp/APPFactory.git
 cd Alphhaspace/apps/backend
 
 # Using uv (recommended)
@@ -250,7 +230,7 @@ Alphhaspace automatically downloads prebuilt binaries for Windows. If prebuilts 
 
 </details>
 
-> **Note:** For regular usage, we recommend downloading the pre-built releases from [GitHub Releases](https://github.com/AndyMik90/Alphhaspace/releases). Running from source is primarily for contributors and those testing unreleased features.
+> **Note:** For regular usage, we recommend downloading the pre-built releases from [GitHub Releases](https://github.com/shibinsp/APPFactory/releases). Running from source is primarily for contributors and those testing unreleased features.
 
 ## Pre-commit Hooks
 

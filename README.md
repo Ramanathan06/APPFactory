@@ -7,7 +7,6 @@
 <!-- TOP_VERSION_BADGE -->
 [![Version](https://img.shields.io/badge/version-2.7.1-blue?style=flat-square)](https://github.com/shibinsp/APPFactory/releases/tag/v2.7.1)
 <!-- TOP_VERSION_BADGE_END -->
-[![License](https://img.shields.io/badge/license-AGPL--3.0-green?style=flat-square)](./agpl-3.0.txt)
 [![Discord](https://img.shields.io/badge/Discord-Join%20Community-5865F2?style=flat-square&logo=discord&logoColor=white)](https://discord.gg/KCXaPBr4Dj)
 [![CI](https://img.shields.io/github/actions/workflow/status/shibinsp/APPFactory/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/shibinsp/APPFactory/actions)
 
@@ -306,13 +305,3 @@ We welcome contributions! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for:
 - **Discord** - [Join our community](https://discord.gg/KCXaPBr4Dj)
 - **Issues** - [Report bugs or request features](https://github.com/shibinsp/APPFactory/issues)
 - **Discussions** - [Ask questions](https://github.com/shibinsp/APPFactory/discussions)
-
----
-
-## License
-
-**AGPL-3.0** - GNU Affero General Public License v3.0
-
-Alphhaspace is free to use. If you modify and distribute it, or run it as a service, your code must also be open source under AGPL-3.0.
-
-Commercial licensing available for closed-source use cases.
