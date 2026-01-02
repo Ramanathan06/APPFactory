@@ -98,6 +98,10 @@ export interface ProjectAPI {
   checkGitStatus: (projectPath: string) => Promise<IPCResult<GitStatus>>;
   initializeGit: (projectPath: string) => Promise<IPCResult<InitializationResult>>;
 
+  // Git Arc Diagram Operations
+  getGitArcData: (projectId: string) => Promise<IPCResult<unknown>>;
+  getGitArcModuleDetail: (projectId: string, modulePath: string) => Promise<IPCResult<unknown>>;
+
   // Ollama Model Detection
   checkOllamaStatus: (baseUrl?: string) => Promise<IPCResult<{
     running: boolean;
@@ -270,6 +274,13 @@ export const createProjectAPI = (): ProjectAPI => ({
 
   initializeGit: (projectPath: string): Promise<IPCResult<InitializationResult>> =>
     ipcRenderer.invoke(IPC_CHANNELS.GIT_INITIALIZE, projectPath),
+
+  // Git Arc Diagram Operations
+  getGitArcData: (projectId: string): Promise<IPCResult<unknown>> =>
+    ipcRenderer.invoke(IPC_CHANNELS.GIT_ARC_GET_DATA, projectId),
+
+  getGitArcModuleDetail: (projectId: string, modulePath: string): Promise<IPCResult<unknown>> =>
+    ipcRenderer.invoke(IPC_CHANNELS.GIT_ARC_GET_MODULE_DETAIL, projectId, modulePath),
 
   // Ollama Model Detection
   checkOllamaStatus: (baseUrl?: string) =>

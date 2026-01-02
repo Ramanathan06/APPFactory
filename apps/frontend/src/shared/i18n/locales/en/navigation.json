@@ -30,6 +30,17 @@
   "messages": {
     "initializeToCreateTasks": "Initialize Alphhaspace to create tasks"
   },
+  "arcDiagram": "Git Arc",
+  "gitArc": {
+    "title": "Git Arc Diagram",
+    "commits": "commits",
+    "uncommitted": "Uncommitted",
+    "noData": "No git data available",
+    "loading": "Loading...",
+    "refresh": "Refresh",
+    "back": "Back",
+    "files": "files"
+  },
   "claudeCode": {
     "checking": "Checking Claude Code...",
     "upToDate": "Claude Code is up to date",
