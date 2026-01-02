@@ -442,6 +442,10 @@ export const IPC_CHANNELS = {
   GIT_CHECK_STATUS: 'git:checkStatus',
   GIT_INITIALIZE: 'git:initialize',
 
+  // Git Arc Diagram operations
+  GIT_ARC_GET_DATA: 'git:arc:getData',
+  GIT_ARC_GET_MODULE_DETAIL: 'git:arc:getModuleDetail',
+
   // App auto-update operations
   APP_UPDATE_CHECK: 'app-update:check',
   APP_UPDATE_DOWNLOAD: 'app-update:download',

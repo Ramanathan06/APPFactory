@@ -32,6 +32,7 @@ import { registerAppUpdateHandlers } from './app-update-handlers';
 import { registerDebugHandlers } from './debug-handlers';
 import { registerClaudeCodeHandlers } from './claude-code-handlers';
 import { registerMcpHandlers } from './mcp-handlers';
+import { registerGitArcHandlers } from './git-arc-handlers';
 import { notificationService } from '../notification-service';
 
 /**
@@ -114,6 +115,9 @@ export function setupIpcHandlers(
   // MCP server health check handlers
   registerMcpHandlers();
 
+  // Git Arc Diagram handlers
+  registerGitArcHandlers();
+
   console.warn('[IPC] All handler modules registered successfully');
 }
 
@@ -139,5 +143,6 @@ export {
   registerAppUpdateHandlers,
   registerDebugHandlers,
   registerClaudeCodeHandlers,
-  registerMcpHandlers
+  registerMcpHandlers,
+  registerGitArcHandlers
 };

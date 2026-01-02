@@ -50,6 +50,7 @@ import { AddProjectModal } from './AddProjectModal';
 import { GitSetupModal } from './GitSetupModal';
 import { RateLimitIndicator } from './RateLimitIndicator';
 import { ClaudeCodeStatusBadge } from './ClaudeCodeStatusBadge';
+import { GitArcPanel } from './git-arc';
 import type { Project, AutoBuildVersionInfo, GitStatus, ProjectEnvConfig } from '../../shared/types';
 
 export type SidebarView = 'kanban' | 'terminals' | 'roadmap' | 'context' | 'ideation' | 'github-issues' | 'gitlab-issues' | 'github-prs' | 'gitlab-merge-requests' | 'changelog' | 'insights' | 'worktrees' | 'agent-tools';
@@ -321,6 +322,14 @@ export function Sidebar({
             </div>
           </div>
         </ScrollArea>
+
+        {/* Git Arc Diagram Panel */}
+        {selectedProject && (
+          <GitArcPanel
+            projectId={selectedProject.id}
+            isGitRepo={gitStatus?.isGitRepo}
+          />
+        )}
 
         <Separator />
 
