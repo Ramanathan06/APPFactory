@@ -94,7 +94,7 @@
     "tailwind-merge": "^3.4.0",
     "uuid": "^13.0.0",
     "zod": "^4.2.1",
-    "zustand": "^5.0.9"
+    "zustand": "^5.0.11"
   },
   "devDependencies": {
     "@electron-toolkit/preload": "^3.0.2",
