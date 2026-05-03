@@ -1,0 +1,268 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    name: Validate Release
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Extract version from tag
+        id: version
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Release version: $VERSION"
+
+      - name: Validate version matches package.json
+        run: |
+          PKG_VERSION=$(node -p "require('./apps/frontend/package.json').version")
+          TAG_VERSION=${{ steps.version.outputs.version }}
+          if [ "$PKG_VERSION" != "$TAG_VERSION" ]; then
+            echo "Version mismatch: package.json has $PKG_VERSION but tag is v$TAG_VERSION"
+            exit 1
+          fi
+          echo "Version validated: $PKG_VERSION"
+
+  build-macos:
+    name: Build macOS
+    runs-on: macos-latest
+    needs: validate
+    strategy:
+      matrix:
+        arch: [x64, arm64]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: apps/frontend/package-lock.json
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: apps/frontend
+
+      - name: Download Python runtime
+        run: npm run python:download -- --platform darwin --arch ${{ matrix.arch }}
+        working-directory: apps/frontend
+        continue-on-error: true
+
+      - name: Build application
+        run: npm run build
+        working-directory: apps/frontend
+
+      - name: Package for macOS ${{ matrix.arch }}
+        run: npx electron-builder --mac --${{ matrix.arch }}
+        working-directory: apps/frontend
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # CSC_LINK: ${{ secrets.MAC_CERT_P12 }}
+          # CSC_KEY_PASSWORD: ${{ secrets.MAC_CERT_PASSWORD }}
+          # APPLE_ID: ${{ secrets.APPLE_ID }}
+          # APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+          # APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-${{ matrix.arch }}
+          path: |
+            apps/frontend/dist/*.dmg
+            apps/frontend/dist/*.zip
+          retention-days: 5
+
+  build-windows:
+    name: Build Windows
+    runs-on: windows-latest
+    needs: validate
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: apps/frontend/package-lock.json
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: apps/frontend
+
+      - name: Download Python runtime
+        run: npm run python:download -- --platform win32 --arch x64
+        working-directory: apps/frontend
+        continue-on-error: true
+
+      - name: Build application
+        run: npm run build
+        working-directory: apps/frontend
+
+      - name: Package for Windows
+        run: npx electron-builder --win
+        working-directory: apps/frontend
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # CSC_LINK: ${{ secrets.WIN_CERT_P12 }}
+          # CSC_KEY_PASSWORD: ${{ secrets.WIN_CERT_PASSWORD }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-x64
+          path: |
+            apps/frontend/dist/*.exe
+            apps/frontend/dist/*.zip
+          retention-days: 5
+
+  build-linux:
+    name: Build Linux
+    runs-on: ubuntu-latest
+    needs: validate
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: apps/frontend/package-lock.json
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y rpm flatpak flatpak-builder
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: apps/frontend
+
+      - name: Download Python runtime
+        run: npm run python:download -- --platform linux --arch x64
+        working-directory: apps/frontend
+        continue-on-error: true
+
+      - name: Build application
+        run: npm run build
+        working-directory: apps/frontend
+
+      - name: Package for Linux
+        run: npx electron-builder --linux AppImage deb
+        working-directory: apps/frontend
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-x64
+          path: |
+            apps/frontend/dist/*.AppImage
+            apps/frontend/dist/*.deb
+          retention-days: 5
+
+  create-release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
+    needs: [validate, build-macos, build-windows, build-linux]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: dist
+
+      - name: List artifacts
+        run: find dist -type f -name "*" | head -50
+
+      - name: Generate changelog
+        id: changelog
+        run: |
+          # Get the previous tag
+          PREV_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+
+          if [ -n "$PREV_TAG" ]; then
+            echo "Generating changelog from $PREV_TAG to HEAD"
+            CHANGELOG=$(git log ${PREV_TAG}..HEAD --pretty=format:"- %s (%h)" --no-merges)
+          else
+            echo "No previous tag found, using recent commits"
+            CHANGELOG=$(git log -20 --pretty=format:"- %s (%h)" --no-merges)
+          fi
+
+          # Write to file for the release body
+          echo "## What's Changed" > changelog.md
+          echo "" >> changelog.md
+          echo "$CHANGELOG" >> changelog.md
+          echo "" >> changelog.md
+          echo "## Downloads" >> changelog.md
+          echo "" >> changelog.md
+          echo "| Platform | Architecture | File |" >> changelog.md
+          echo "|----------|--------------|------|" >> changelog.md
+          echo "| macOS | Intel (x64) | \`Alphhaspace-${{ needs.validate.outputs.version }}-darwin-x64.dmg\` |" >> changelog.md
+          echo "| macOS | Apple Silicon (arm64) | \`Alphhaspace-${{ needs.validate.outputs.version }}-darwin-arm64.dmg\` |" >> changelog.md
+          echo "| Windows | x64 | \`Alphhaspace-${{ needs.validate.outputs.version }}-win32-x64.exe\` |" >> changelog.md
+          echo "| Linux | x64 | \`Alphhaspace-${{ needs.validate.outputs.version }}-linux-x64.AppImage\` |" >> changelog.md
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Alphhaspace v${{ needs.validate.outputs.version }}
+          body_path: changelog.md
+          draft: false
+          prerelease: ${{ contains(needs.validate.outputs.version, 'beta') || contains(needs.validate.outputs.version, 'alpha') }}
+          files: |
+            dist/**/*.dmg
+            dist/**/*.zip
+            dist/**/*.exe
+            dist/**/*.AppImage
+            dist/**/*.deb
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Summary
+        run: |
+          echo "## Release Published" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Version:** v${{ needs.validate.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Artifacts" >> $GITHUB_STEP_SUMMARY
+          find dist -type f -name "*" | while read f; do
+            echo "- \`$(basename $f)\`" >> $GITHUB_STEP_SUMMARY
+          done
