@@ -241,7 +241,7 @@ jobs:
           echo "| Linux | x64 | \`Alphhaspace-${{ needs.validate.outputs.version }}-linux-x64.AppImage\` |" >> changelog.md
 
       - name: Create Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           name: Alphhaspace v${{ needs.validate.outputs.version }}
           body_path: changelog.md
